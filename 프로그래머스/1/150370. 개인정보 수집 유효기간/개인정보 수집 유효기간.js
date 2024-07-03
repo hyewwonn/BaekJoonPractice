@@ -1,8 +1,7 @@
 function solution(today, terms, privacies) {
     const answer = [];
-    
+
     const [todayYear, todayMonth, todayDay] = today.split('.').map(Number);
-    const todayDate = new Date(todayYear, todayMonth - 1, todayDay);
 
     const termMap = {};
     terms.forEach(term => {
@@ -29,5 +28,5 @@ function solution(today, terms, privacies) {
         }
     });
 
-    return answer.sort((a, b) => a - b);
+    return answer;
 }
