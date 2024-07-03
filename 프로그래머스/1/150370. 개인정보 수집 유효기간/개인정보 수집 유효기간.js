@@ -1,10 +1,8 @@
 function solution(today, terms, privacies) {
-    const parseDate = (date) => {
-        const [year, month, day] = date.split('.').map(Number);
-        return new Date(year, month - 1, day);
-    };
+    const answer = [];
 
-    const todayDate = parseDate(today);
+    const [todayYear, todayMonth, todayDay] = today.split('.').map(Number);
+    const todayDate = new Date(todayYear, todayMonth - 1, todayDay);
 
     const termMap = {};
     terms.forEach(term => {
@@ -12,20 +10,18 @@ function solution(today, terms, privacies) {
         termMap[type] = parseInt(duration);
     });
 
-    const result = [];
-
     privacies.forEach((privacy, index) => {
         const [date, termType] = privacy.split(' ');
-        const collectedDate = parseDate(date);
+        const [year, month, day] = date.split('.').map(Number);
+        const collectedDate = new Date(year, month - 1, day);
         const durationMonths = termMap[termType];
 
-        const expiryDate = new Date(collectedDate);
-        expiryDate.setMonth(expiryDate.getMonth() + durationMonths);
+        const expiryDate = new Date(year, month - 1 + durationMonths, day);
 
         if (expiryDate <= todayDate) {
-            result.push(index + 1);
+            answer.push(index + 1);
         }
     });
 
-    return result;
+    return answer.sort((a, b) => a - b);
 }
