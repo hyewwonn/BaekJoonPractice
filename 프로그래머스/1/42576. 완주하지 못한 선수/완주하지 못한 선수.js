@@ -1,18 +1,12 @@
 function solution(participant, completion) {
-    const participantMap = new Map(); // 해시맵
+    const participantMap = new Map();
     
-    for (const person of participant) {
-        if (participantMap.has(person)) {
-            participantMap.set(person, participantMap.get(person) + 1);
-        } else {
-            participantMap.set(person, 1);
-        }
-    }
+    for(let i = 0; i < participant.length; i++) {
+        let a = participant[i], 
+            b = completion[i];
 
-    for (const person of completion) {
-        if (participantMap.has(person)) {
-            participantMap.set(person, participantMap.get(person) - 1);
-        }
+        participantMap.set(a, (participantMap.get(a) || 0) + 1);
+        participantMap.set(b, (participantMap.get(b) || 0) - 1);
     }
 
     for (const [key, value] of participantMap) {
