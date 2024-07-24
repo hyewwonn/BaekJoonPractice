@@ -5,7 +5,6 @@ function solution(number, limit, power) {
         let count = divisor(i);
         answer += (count > limit ? power : count);
     }
-    divisor(100);
     
     return answer;
 }
